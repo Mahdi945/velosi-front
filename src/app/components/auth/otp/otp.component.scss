@@ -1,0 +1,224 @@
+// Styles spécifiques au composant OTP
+// Complète les styles globaux du template Bootstrap Modernize
+
+.auth-card {
+  .card {
+    border: none;
+    box-shadow: 0 20px 27px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    
+    .card-body {
+      padding: 2.5rem;
+    }
+  }
+}
+
+// Styles pour les champs OTP
+.otp-input {
+  border-radius: 12px !important;
+  border: 2px solid #e0e6ed !important;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease !important;
+  
+  &:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25) !important;
+    transform: scale(1.05);
+  }
+  
+  &:valid {
+    border-color: var(--bs-success) !important;
+    background-color: rgba(var(--bs-success-rgb), 0.05);
+  }
+}
+
+// Animation pour les icônes
+.animate__animated {
+  animation-duration: 2s;
+  animation-fill-mode: both;
+}
+
+.animate__bounce {
+  animation-name: bounce;
+}
+
+@keyframes bounce {
+  from, 20%, 53%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transform: translate3d(0,0,0);
+  }
+
+  40%, 43% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -30px, 0);
+  }
+
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -15px, 0);
+  }
+
+  90% {
+    transform: translate3d(0,-4px,0);
+  }
+}
+
+.animate__infinite {
+  animation-iteration-count: infinite;
+}
+
+// Amélioration des alertes
+.alert {
+  border: none;
+  
+  &.alert-success {
+    background-color: rgba(var(--bs-success-rgb), 0.1);
+    color: var(--bs-success);
+    border-left: 4px solid var(--bs-success);
+  }
+  
+  &.alert-danger {
+    background-color: rgba(var(--bs-danger-rgb), 0.1);
+    color: var(--bs-danger);
+    border-left: 4px solid var(--bs-danger);
+  }
+}
+
+// Boutons améliorés
+.btn {
+  font-weight: 600;
+  text-transform: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  
+  &.btn-primary {
+    background: linear-gradient(135deg, var(--bs-primary) 0%, #4f46e5 100%);
+    border: none;
+    
+    &:hover {
+      background: linear-gradient(135deg, #4f46e5 0%, var(--bs-primary) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(var(--bs-primary-rgb), 0.3);
+    }
+    
+    &:disabled {
+      background: #6c757d;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+  
+  &.btn-link {
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  &.bg-light-secondary {
+    &:hover {
+      background-color: rgba(var(--bs-secondary-rgb), 0.2) !important;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Container pour les champs OTP
+.d-flex.justify-content-center.gap-2 {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+// Spinner pour le loading
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+// Amélioration du logo
+.logo-img img {
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Timer style
+.text-primary.fw-bold {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+}
+
+// Box d'information avec dégradé
+.bg-light-success {
+  background: linear-gradient(135deg, rgba(var(--bs-success-rgb), 0.1) 0%, rgba(var(--bs-success-rgb), 0.05) 100%) !important;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .auth-card .card .card-body {
+    padding: 1.5rem;
+  }
+  
+  .logo-img img {
+    width: 140px !important;
+  }
+  
+  .otp-input {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1rem !important;
+  }
+  
+  h4, h5 {
+    font-size: 1.1rem;
+  }
+  
+  .fs-5 {
+    font-size: 0.95rem !important;
+  }
+  
+  .fs-6 {
+    font-size: 0.85rem !important;
+  }
+  
+  .d-flex.justify-content-center.gap-2 {
+    gap: 0.5rem !important;
+  }
+}
+
+// Animation d'entrée
+.card {
+  animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Animation pour les champs OTP lors de la saisie
+.otp-input {
+  &:not(:placeholder-shown) {
+    animation: inputFill 0.3s ease-out;
+  }
+}
+
+@keyframes inputFill {
+  from {
+    transform: scale(0.95);
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+  }
+  to {
+    transform: scale(1);
+    background-color: transparent;
+  }
+}

@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Styles globaux pour l'application Velosi ERP
+// Les assets CSS sont déjà importés via angular.json
+
+// Styles personnalisés si nécessaires
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+// Ajout de styles pour une meilleure intégration du template
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}
+
+// Ensure proper responsive behavior
+.main-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+// Ensure Angular app takes full height
+app-root {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+// Fix for sidebar responsiveness
+@media (max-width: 1199px) {
+  .left-sidebar {
+    margin-left: -270px;
+  }
+  
+  .left-sidebar.show {
+    margin-left: 0;
+  }
+}

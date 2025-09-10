@@ -1,0 +1,187 @@
+<!-- Angular Component OTP - Styles et scripts gérés dans angular.json -->
+<!-- Preloader -->
+<div class="preloader">
+  <img src="assets/images/logos/logo_societe.png" alt="loader" class="lds-ripple img-fluid" width="80" />
+</div>
+<div id="main-wrapper" class="auth-customizer-none">
+  <div class="position-relative overflow-hidden radial-gradient min-vh-100 w-100 d-flex align-items-center justify-content-center">
+    <div class="d-flex align-items-center justify-content-center w-100">
+      <div class="row justify-content-center w-100">
+        <div class="col-md-10 col-lg-8 col-xl-6 col-xxl-5 auth-card">
+          <div class="card mb-0">
+            <div class="card-body pt-5">
+              <a routerLink="/" class="text-nowrap logo-img text-center d-block mb-3 w-100">
+                <img src="assets/images/logos/logo_societe.png" width="180" alt="Velosi ERP" />
+              </a>
+              
+              <!-- Slogan de la société -->
+              <div class="text-center mb-4">
+               
+                <p class="text-muted fs-5 mb-0">Votre partenaire de confiance</p>
+                <p class="text-muted fs-6 mb-0">Transport & Logistique</p>
+              </div>
+              
+              <!-- Message d'information avec animation -->
+              <div class="text-center mb-4 p-4 rounded-3 bg-light-success border border-success-subtle">
+                <div class="mb-3">
+                  <iconify-icon icon="solar:smartphone-2-bold-duotone" 
+                                class="fs-7 text-success animate__animated animate__bounce animate__infinite"></iconify-icon>
+                </div>
+                <h5 class="fw-semibold text-dark mb-2">Code de vérification</h5>
+                <p class="mb-0 text-muted fs-4">
+                  Un code OTP (One-Time Password) de 6 chiffres a été envoyé à votre numéro de téléphone. 
+                  Vous allez recevoir un code OTP dans quelques instants.
+                </p>
+              </div>
+              
+              <!-- Affichage du numéro masqué -->
+             
+              
+              <!-- Formulaire OTP -->
+              <form (ngSubmit)="onSubmit()" #otpForm="ngForm">
+                <!-- Champs OTP -->
+                <div class="mb-4">
+                  <label class="form-label fw-semibold text-center d-block mb-3">
+                    <iconify-icon icon="solar:key-bold" class="me-2 text-primary"></iconify-icon>
+                    Saisissez le code à 6 chiffres
+                  </label>
+                  
+                  <div class="d-flex justify-content-center gap-2">
+                    <input type="text" 
+                           class="form-control text-center fw-bold fs-4 otp-input" 
+                           maxlength="1" 
+                           [(ngModel)]="otpDigits[0]" 
+                           name="otp1"
+                           #otp1
+                           (input)="onOtpInput($event, 0)"
+                           (keydown)="onKeyDown($event, 0)"
+                           style="width: 50px; height: 50px;">
+                    <input type="text" 
+                           class="form-control text-center fw-bold fs-4 otp-input" 
+                           maxlength="1" 
+                           [(ngModel)]="otpDigits[1]" 
+                           name="otp2"
+                           #otp2
+                           (input)="onOtpInput($event, 1)"
+                           (keydown)="onKeyDown($event, 1)"
+                           style="width: 50px; height: 50px;">
+                    <input type="text" 
+                           class="form-control text-center fw-bold fs-4 otp-input" 
+                           maxlength="1" 
+                           [(ngModel)]="otpDigits[2]" 
+                           name="otp3"
+                           #otp3
+                           (input)="onOtpInput($event, 2)"
+                           (keydown)="onKeyDown($event, 2)"
+                           style="width: 50px; height: 50px;">
+                    <input type="text" 
+                           class="form-control text-center fw-bold fs-4 otp-input" 
+                           maxlength="1" 
+                           [(ngModel)]="otpDigits[3]" 
+                           name="otp4"
+                           #otp4
+                           (input)="onOtpInput($event, 3)"
+                           (keydown)="onKeyDown($event, 3)"
+                           style="width: 50px; height: 50px;">
+                    <input type="text" 
+                           class="form-control text-center fw-bold fs-4 otp-input" 
+                           maxlength="1" 
+                           [(ngModel)]="otpDigits[4]" 
+                           name="otp5"
+                           #otp5
+                           (input)="onOtpInput($event, 4)"
+                           (keydown)="onKeyDown($event, 4)"
+                           style="width: 50px; height: 50px;">
+                    <input type="text" 
+                           class="form-control text-center fw-bold fs-4 otp-input" 
+                           maxlength="1" 
+                           [(ngModel)]="otpDigits[5]" 
+                           name="otp6"
+                           #otp6
+                           (input)="onOtpInput($event, 5)"
+                           (keydown)="onKeyDown($event, 5)"
+                           style="width: 50px; height: 50px;">
+                  </div>
+                </div>
+                
+                <!-- Timer de renvoi -->
+                <div class="text-center mb-4">
+                  <p class="text-muted fs-4" *ngIf="remainingTime > 0">
+                    Code valide pendant encore : 
+                    <span class="text-primary fw-bold">{{ formatTime(remainingTime) }}</span>
+                  </p>
+                  
+                  <button type="button" 
+                          class="btn btn-link text-primary p-0 fw-medium"
+                          *ngIf="remainingTime === 0"
+                          (click)="resendOtp()"
+                          [disabled]="isResending">
+                    <iconify-icon icon="solar:refresh-bold" class="me-1"></iconify-icon>
+                    {{ isResending ? 'Envoi...' : 'Renvoyer le code' }}
+                  </button>
+                </div>
+                
+                <!-- Boutons d'action -->
+                <div class="d-grid gap-2 mb-3">
+                  <button type="submit" 
+                          class="btn btn-primary py-3 rounded-3 fw-semibold" 
+                          [disabled]="!isOtpComplete() || isVerifying">
+                    <span *ngIf="!isVerifying">
+                      <iconify-icon icon="solar:shield-check-bold" class="me-2"></iconify-icon>
+                      Vérifier le code
+                    </span>
+                    <span *ngIf="isVerifying">
+                      <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                      Vérification...
+                    </span>
+                  </button>
+                </div>
+                
+                <!-- Lien retour login -->
+                <div class="text-center">
+                  <a routerLink="/login" 
+                     class="btn bg-light-secondary text-secondary w-100 py-3 rounded-3 fw-medium">
+                    <iconify-icon icon="solar:alt-arrow-left-bold" class="me-2"></iconify-icon>
+                    Retour à la connexion
+                  </a>
+                </div>
+              </form>
+              
+              <!-- Message de succès -->
+              <div *ngIf="verificationSuccess" class="alert alert-success mt-3 rounded-3">
+                <div class="d-flex align-items-center">
+                  <iconify-icon icon="solar:check-circle-bold" class="fs-6 me-2"></iconify-icon>
+                  <div>
+                    <strong>Code vérifié !</strong><br>
+                    <small>Redirection en cours...</small>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Message d'erreur -->
+              <div *ngIf="errorMessage" class="alert alert-danger mt-3 rounded-3">
+                <div class="d-flex align-items-center">
+                  <iconify-icon icon="solar:danger-circle-bold" class="fs-6 me-2"></iconify-icon>
+                  <div>
+                    <strong>Erreur :</strong><br>
+                    <small>{{ errorMessage }}</small>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Information de sécurité -->
+              <div class="text-center mt-4">
+                <div class="border-top pt-3">
+                  <p class="text-muted fs-4 mb-0">
+                    <iconify-icon icon="solar:shield-check-linear" class="me-1 text-success"></iconify-icon>
+                    Code sécurisé • Ne partagez jamais votre code OTP
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

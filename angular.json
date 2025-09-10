@@ -32,9 +32,21 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "public/assets/css/styles.css",
+              "public/assets/libs/owl.carousel/dist/assets/owl.carousel.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "public/assets/libs/simplebar/dist/simplebar.min.js",
+              "public/assets/libs/owl.carousel/dist/owl.carousel.min.js",
+              "public/assets/libs/apexcharts/dist/apexcharts.min.js",
+              "public/assets/js/theme/sidebarmenu.js",
+              "public/assets/js/theme/app.min.js",
+              "public/assets/js/dashboards/dashboard-clean.js"
+            ]
           },
           "configurations": {
             "production": {

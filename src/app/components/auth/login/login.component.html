@@ -1,0 +1,108 @@
+<!-- Angular Component Login - Styles et scripts gérés dans angular.json -->
+<!-- Preloader -->
+<div class="preloader">
+  <img src="assets/images/logos/logo_societe.png" alt="loader" class="lds-ripple img-fluid" width="80" />
+</div>
+<div id="main-wrapper" class="auth-customizer-none">
+  <div class="position-relative overflow-hidden radial-gradient min-vh-100 w-100 d-flex align-items-center justify-content-center">
+    <div class="d-flex align-items-center justify-content-center w-100">
+      <div class="row justify-content-center w-100">
+        <div class="col-md-8 col-lg-6 col-xxl-3 auth-card">
+          <div class="card mb-0">
+            <div class="card-body">
+              <a routerLink="/" class="text-nowrap logo-img text-center d-block mb-3 w-100">
+                 <img src="assets/images/logos/logo_societe.png" width="180" alt="Velosi ERP" />
+              </a>
+              
+              <!-- Slogan de la société -->
+              <div class="text-center mb-4">
+                
+                <p class="text-muted fs-5 mb-0">Votre partenaire de confiance</p>
+                <p class="text-muted fs-6 mb-0">Transport & Logistique</p>
+                
+              </div>
+              
+              <!-- Titre de connexion -->
+              <div class="text-center mb-4">
+                <h4 class="fw-semibold text-dark mb-2">Connectez-vous à votre espace</h4>
+               
+              </div>
+              <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+                <!-- Champ Username avec icône -->
+                <div class="mb-3">
+                  <label for="username" class="form-label fw-semibold">
+                    <iconify-icon icon="solar:user-bold" class="me-2 text-primary"></iconify-icon>
+                    Nom d'utilisateur
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light-primary">
+                      <iconify-icon icon="solar:user-linear" class="text-primary"></iconify-icon>
+                    </span>
+                    <input type="email" class="form-control ps-3" id="username" name="username" 
+                           [(ngModel)]="loginData.username" required 
+                           placeholder="votre.email@velosi.com"
+                           aria-describedby="emailHelp">
+                  </div>
+                </div>
+                
+                <!-- Champ Password avec icône -->
+                <div class="mb-4">
+                  <label for="password" class="form-label fw-semibold">
+                    <iconify-icon icon="solar:lock-bold" class="me-2 text-primary"></iconify-icon>
+                    Mot de passe
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light-primary">
+                      <iconify-icon icon="solar:lock-linear" class="text-primary"></iconify-icon>
+                    </span>
+                    <input type="password" class="form-control ps-3" id="password" name="password" 
+                           [(ngModel)]="loginData.password" required
+                           placeholder="Entrez votre mot de passe">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                      <iconify-icon icon="solar:eye-linear"></iconify-icon>
+                    </button>
+                  </div>
+                </div>
+                
+                <!-- Options avancées -->
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <div class="form-check">
+                    
+                   
+                  </div>
+                  <a class="text-primary fw-medium fs-3" routerLink="/forgot-password">
+                    <iconify-icon icon="solar:question-circle-linear" class="me-1"></iconify-icon>
+                    Mot de passe oublié ?
+                  </a>
+                </div>
+                
+                <!-- Bouton de connexion avec animation -->
+                <button type="submit" class="btn btn-primary w-100 py-3 mb-4 rounded-3 fw-semibold" 
+                        [disabled]="!loginForm.valid">
+                  <iconify-icon icon="solar:login-2-bold" class="me-2"></iconify-icon>
+                  Se connecter à Velosi ERP
+                </button>
+                
+                <!-- Informations d'aide -->
+                <div class="text-center">
+                  <div class="alert alert-light-info border-0 py-2 mb-3">
+                    <iconify-icon icon="solar:info-circle-bold" class="text-info me-2"></iconify-icon>
+                    <small class="text-muted">
+                      Première connexion ? Contactez votre administrateur système
+                    </small>
+                  </div>
+                  
+                  <div class="d-flex align-items-center justify-content-center">
+                    <small class="text-muted">
+                      © 2025 Velosi ERP - Transport & Logistique
+                    </small>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

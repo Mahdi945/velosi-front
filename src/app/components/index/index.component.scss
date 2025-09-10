@@ -1,0 +1,43 @@
+// Styles spécifiques au composant Index
+// Ces styles s'appliquent uniquement à ce composant
+
+// Assurer que le composant prend toute la hauteur
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+// Styles pour le preloader
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .lds-ripple {
+    max-width: 80px;
+    max-height: 80px;
+  }
+}
+
+// Styles pour le wrapper principal
+#main-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+// Responsive adjustments pour le sidebar
+@media (max-width: 1199px) {
+  .left-sidebar {
+    position: fixed;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+}
